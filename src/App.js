@@ -6,7 +6,7 @@ function App() {
   const [book, setBook] = useState("");
   const [result, setResult] = useState([]);
   const [apiKey, setApiKey] = useState("AIzaSyBsdmVIL8uuiKFRfVhMmS3LsrjaybwKATY");
-
+  const [favoBook, setBookFavo] = useState([])
 
 
 
@@ -23,6 +23,15 @@ function App() {
       setResult(data.data.items);
     })
   }
+  const addFavoMovie = (book) => {
+    const favoList = [...favoBook, book];
+    setBookFavo(favoList);
+  }
+
+  {/*function favoBook (event){*/}
+  //  event.preventDefault(book);
+   // axios.get(data.)
+  //}
 
 
 
@@ -43,15 +52,16 @@ function App() {
         </div>
         <button type = "submit" className = "btn btn-danger">Buscar</button>
       </form>
- 
+      <div>
         {result.map(book => (
+          <a href = {book.volumeInfo.previewLink}>
           <img src = {
             book.volumeInfo.imageLinks === undefined
               ? ""
               : `${book.volumeInfo.imageLinks.thumbnail}`
-        } alt = {book.title}/>
+        } alt = {book.title} handleFavo = {addFavoMovie}/></a>
         ))}
-
+      </div>
     </div>
   
   );
